@@ -10,6 +10,7 @@ import {
   TableBody,
   Table,
   Avatar,
+  Typography,
 } from "@mui/material";
 import { EnhancedTableHead } from "../../components/EnchancedTableHead";
 import { getComparator } from "../../helpers/helpers";
@@ -19,9 +20,13 @@ const USERS_API_URL = "https://jsonplaceholder.typicode.com/users";
 
 const UsersManagementScreen = () => {
   const [users, setUsers] = useState(null);
+  const [isError, setError] = useState(false);
+  const [isLoading, setLoading] = useState(false);
+
   const { order, orderBy, handleRequestSort } = useHandleRequestSort();
 
   useEffect(() => {
+    setLoading(true);
     fetch(USERS_API_URL)
       .then((res) => res.json())
       .then((data) => {
@@ -38,8 +43,36 @@ const UsersManagementScreen = () => {
           return acc;
         }, []);
         setUsers(formatUsersData);
+      })
+      .catch((err) => {
+        setError(err);
+      })
+      .finally(() => {
+        setLoading(false);
       });
   }, []);
+
+  if (isError) {
+    return (
+      <>
+        <TopBar name="Users Management" />
+        <Container>
+          <Typography>Ooops something went wrong...</Typography>
+        </Container>
+      </>
+    );
+  }
+
+  if (isLoading) {
+    return (
+      <>
+        <TopBar name="Users Management" />
+        <Container>
+          <Typography>Loading...</Typography>
+        </Container>
+      </>
+    );
+  }
   return (
     <>
       <TopBar name="Users Management" />
