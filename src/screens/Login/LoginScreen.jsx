@@ -5,15 +5,17 @@ import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 import { Paper, Link } from "@mui/material";
 import { CenterItems } from "../../components/CenterItems";
+import { useNavigate } from "react-router-dom";
+import routes from "../../routes/routes";
 
 const labels = {
   pageName: "Log in",
   createAcount: "Create account",
   forgotAccount: "Forgot Password?",
-  inputLabels:{
-    email:"Email Address",
-    password:"Password"
-  }
+  inputLabels: {
+    email: "Email Address",
+    password: "Password",
+  },
 };
 
 function LoginScreen() {
@@ -25,6 +27,8 @@ function LoginScreen() {
       password: data.get("password"),
     });
   };
+
+  const navigate = useNavigate();
 
   return (
     <CenterItems>
@@ -83,7 +87,7 @@ function LoginScreen() {
                 component="button"
                 variant="body2"
                 onClick={() => {
-                  console.log("create acc");
+                  navigate(routes.register.path);
                 }}
               >
                 {labels.createAcount}
@@ -92,7 +96,7 @@ function LoginScreen() {
                 component="button"
                 variant="body2"
                 onClick={() => {
-                  console.log("reset");
+                  navigate(routes.reset.path);
                 }}
               >
                 {labels.forgotAccount}
