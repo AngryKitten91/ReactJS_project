@@ -6,8 +6,14 @@ import RegisterScreen from "./screens/Register/RegisterScreen";
 import ResetScreen from "./screens/Reset/ResetScreen";
 import Dashboard from "./screens/Dashboard/Dashboard";
 import UsersManagementScreen from "./screens/UserManagement/UsersManagementScreen";
+import { ProtectedRoute } from "./providers/ProtectedRoute.jsx";
+import { Navigate } from "react-router-dom";
 
 const router = createBrowserRouter([
+  {
+    path: "/",
+    element: <LoginScreen />,
+  },
   {
     path: routes.login.path,
     element: <LoginScreen />,
@@ -22,11 +28,23 @@ const router = createBrowserRouter([
   },
   {
     path: routes.dashboard.path,
-    element: <Dashboard />,
+    element: (
+      <ProtectedRoute>
+        <Dashboard />
+      </ProtectedRoute>
+    ),
   },
   {
     path: routes.users.path,
-    element: <UsersManagementScreen />,
+    element: (
+      <ProtectedRoute>
+        <UsersManagementScreen />
+      </ProtectedRoute>
+    ),
+  },
+  {
+    path: "*",
+    element: <Navigate to={routes.login.path} />,
   },
 ]);
 
