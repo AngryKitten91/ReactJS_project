@@ -39,6 +39,6 @@ const Dashboard = () => {
       </CenterItems>
     </>
   );
-}
+};
 
 export default Dashboard;
