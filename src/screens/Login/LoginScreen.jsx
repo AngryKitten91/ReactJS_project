@@ -20,7 +20,7 @@ const labels = {
   },
 };
 
-function LoginScreen() {
+const LoginScreen = () => {
   const handleSubmit = (event) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
@@ -112,6 +112,6 @@ function LoginScreen() {
       </CenterItems>
     </>
   );
-}
+};
 
 export default LoginScreen;

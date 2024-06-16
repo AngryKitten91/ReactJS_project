@@ -14,7 +14,7 @@ const labels = {
   ],
 };
 
-function Dashboard() {
+const Dashboard = () => {
   return (
     <>
       <TopBar />

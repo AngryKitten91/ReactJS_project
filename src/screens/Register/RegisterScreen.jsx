@@ -19,7 +19,7 @@ const labels = {
   },
 };
 
-function RegisterScreen() {
+const RegisterScreen = () => {
   const handleSubmit = (event) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
@@ -113,6 +113,6 @@ function RegisterScreen() {
       </CenterItems>
     </>
   );
-}
+};
 
 export default RegisterScreen;

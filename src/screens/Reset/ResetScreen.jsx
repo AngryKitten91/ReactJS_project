@@ -14,7 +14,7 @@ const labels = {
   },
 };
 
-function ResetScreen() {
+const ResetScreen = () => {
   const handleSubmit = (event) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
@@ -73,6 +73,6 @@ function ResetScreen() {
       </CenterItems>
     </>
   );
-}
+};
 
 export default ResetScreen;

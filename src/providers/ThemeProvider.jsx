@@ -22,9 +22,7 @@ let darkTheme = createTheme({
       default: "#303030",
       paper: "#424242",
     },
-   
   },
-  
 });
 
 export const ThemeProvider = ({ children }) => {

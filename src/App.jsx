@@ -1,10 +1,11 @@
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
-import { ThemeProvider } from "./providers/ThemeProvider.jsx";
+import { ThemeProvider } from "./providers/ThemeProvider";
 import routes from "./routes/routes.js";
-import LoginScreen from "./screens/Login/LoginScreen.jsx";
-import RegisterScreen from "./screens/Register/RegisterScreen.jsx";
-import ResetScreen from "./screens/Reset/ResetScreen.jsx";
-import Dashboard from "./screens/Dashboard/Dashboard.jsx";
+import LoginScreen from "./screens/Login/LoginScreen";
+import RegisterScreen from "./screens/Register/RegisterScreen";
+import ResetScreen from "./screens/Reset/ResetScreen";
+import Dashboard from "./screens/Dashboard/Dashboard";
+import UsersManagementScreen from "./screens/UserManagement/UsersManagementScreen";
 
 const router = createBrowserRouter([
   {
@@ -22,6 +23,10 @@ const router = createBrowserRouter([
   {
     path: routes.dashboard.path,
     element: <Dashboard />,
+  },
+  {
+    path: routes.users.path,
+    element: <UsersManagementScreen />,
   },
 ]);
 

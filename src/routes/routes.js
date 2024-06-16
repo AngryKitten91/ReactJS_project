@@ -15,7 +15,7 @@ const routes = {
     path: "/login",
   },
   users: {
-    path: "/login",
+    path: "/management",
   },
 };
 
