@@ -6,6 +6,7 @@ import Container from "@mui/material/Container";
 import { Paper, Link } from "@mui/material";
 import { CenterItems } from "../../components/CenterItems";
 import { useNavigate } from "react-router-dom";
+import { TopBar } from "../../components/TopBar";
 import routes from "../../routes/routes";
 
 const labels = {
@@ -31,83 +32,86 @@ function RegisterScreen() {
   const navigate = useNavigate();
 
   return (
-    <CenterItems>
-      <Container component="main" maxWidth="xs">
-        <Paper elevation={3} sx={{ p: 2 }}>
-          <Box
-            sx={{
-              display: "flex",
-              flexDirection: "column",
-              alignItems: "left",
-            }}
-          >
-            <Typography align="left" component="h1" variant="h5">
-              {labels.pageName}
-            </Typography>
+    <>
+      <TopBar />
+      <CenterItems>
+        <Container component="main" maxWidth="xs">
+          <Paper elevation={3} sx={{ p: 2 }}>
             <Box
-              component="form"
-              onSubmit={handleSubmit}
-              noValidate
-              sx={{ mt: 1 }}
+              sx={{
+                display: "flex",
+                flexDirection: "column",
+                alignItems: "left",
+              }}
             >
-              <TextField
-                margin="normal"
-                required
-                fullWidth
-                id="email"
-                label={labels.inputLabels.email}
-                name="email"
-                autoComplete="email"
-                variant="filled"
-                autoFocus
-              />
-              <TextField
-                margin="normal"
-                required
-                fullWidth
-                name="password"
-                label={labels.inputLabels.password}
-                type="password"
-                id="password"
-                variant="filled"
-                autoComplete="current-password"
-              />
-              <TextField
-                margin="normal"
-                required
-                fullWidth
-                name="confirmPassword"
-                label={labels.inputLabels.confirmPassword}
-                type="password"
-                id="confirmPassword"
-                variant="filled"
-                autoComplete="current-password"
-              />
-
-              <Button
-                type="submit"
-                fullWidth
-                variant="contained"
-                sx={{ mt: 3, mb: 2 }}
-              >
+              <Typography align="left" component="h1" variant="h5">
                 {labels.pageName}
-              </Button>
-            </Box>
-            <Box sx={{ display: "flex", justifyContent: "center" }}>
-              <Link
-                component="button"
-                variant="body2"
-                onClick={() => {
-                  navigate(routes.login.path);
-                }}
+              </Typography>
+              <Box
+                component="form"
+                onSubmit={handleSubmit}
+                noValidate
+                sx={{ mt: 1 }}
               >
-                {labels.LogIn}
-              </Link>
+                <TextField
+                  margin="normal"
+                  required
+                  fullWidth
+                  id="email"
+                  label={labels.inputLabels.email}
+                  name="email"
+                  autoComplete="email"
+                  variant="filled"
+                  autoFocus
+                />
+                <TextField
+                  margin="normal"
+                  required
+                  fullWidth
+                  name="password"
+                  label={labels.inputLabels.password}
+                  type="password"
+                  id="password"
+                  variant="filled"
+                  autoComplete="current-password"
+                />
+                <TextField
+                  margin="normal"
+                  required
+                  fullWidth
+                  name="confirmPassword"
+                  label={labels.inputLabels.confirmPassword}
+                  type="password"
+                  id="confirmPassword"
+                  variant="filled"
+                  autoComplete="current-password"
+                />
+
+                <Button
+                  type="submit"
+                  fullWidth
+                  variant="contained"
+                  sx={{ mt: 3, mb: 2 }}
+                >
+                  {labels.pageName}
+                </Button>
+              </Box>
+              <Box sx={{ display: "flex", justifyContent: "center" }}>
+                <Link
+                  component="button"
+                  variant="body2"
+                  onClick={() => {
+                    navigate(routes.login.path);
+                  }}
+                >
+                  {labels.LogIn}
+                </Link>
+              </Box>
             </Box>
-          </Box>
-        </Paper>
-      </Container>
-    </CenterItems>
+          </Paper>
+        </Container>
+      </CenterItems>
+    </>
   );
 }
 
