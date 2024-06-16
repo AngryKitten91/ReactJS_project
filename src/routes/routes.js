@@ -9,6 +9,12 @@ const routes = {
     path: "/reset",
   },
   dashboard: {
+    path: "/dashboard",
+  },
+  jobs: {
+    path: "/login",
+  },
+  users: {
     path: "/login",
   },
 };

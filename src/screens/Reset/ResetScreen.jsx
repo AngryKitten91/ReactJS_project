@@ -8,8 +8,6 @@ import { CenterItems } from "../../components/CenterItems";
 
 const labels = {
   pageName: "Reset Password",
-  createAcount: "Create an account",
-  login: "Forgot Password?",
   inputLabels: {
     email: "Email Address",
   },

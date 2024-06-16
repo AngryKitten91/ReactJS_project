@@ -12,6 +12,7 @@ const labels = {
   pageName: "Log in",
   createAcount: "Create account",
   forgotAccount: "Forgot Password?",
+  logIn:"Log in",
   inputLabels: {
     email: "Email Address",
     password: "Password",
@@ -79,7 +80,7 @@ function LoginScreen() {
                 variant="contained"
                 sx={{ mt: 3, mb: 2 }}
               >
-                LOG IN
+                {labels.logIn}
               </Button>
             </Box>
             <Box sx={{ display: "flex", justifyContent: "space-between" }}>
