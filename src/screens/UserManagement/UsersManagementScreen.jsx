@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { TopBar } from "../../components/TopBar";
+import { BackButton } from "../../components/BackButton";
 
 import {
   Container,
@@ -57,6 +58,7 @@ const UsersManagementScreen = () => {
       <>
         <TopBar name="Users Management" />
         <Container>
+          <BackButton />
           <Typography>Ooops something went wrong...</Typography>
         </Container>
       </>
@@ -68,6 +70,7 @@ const UsersManagementScreen = () => {
       <>
         <TopBar name="Users Management" />
         <Container>
+          <BackButton />
           <Typography>Loading...</Typography>
         </Container>
       </>
@@ -77,6 +80,7 @@ const UsersManagementScreen = () => {
     <>
       <TopBar name="Users Management" />
       <Container>
+        <BackButton />
         <TableContainer sx={{ mt: 3 }} component={Paper}>
           <Table sx={{ minWidth: 650 }} aria-label="simple table">
             <EnhancedTableHead

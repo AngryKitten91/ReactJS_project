@@ -5,14 +5,12 @@ import { CenterItems } from "../../components/CenterItems";
 import routes from "../../routes/routes";
 import { BoxNavigation } from "../../components/BoxNavigation";
 import { TopBar } from "../../components/TopBar";
+import { labels } from "../../labels/labels";
 
-const labels = {
-  pageName: "Pick module",
-  sections: [
-    { name: "Users Management", path: routes.users.path },
-    { name: "Jobs Directory", path: routes.users.path },
-  ],
-};
+const sections = [
+  { name: "Users Management", path: routes.users.path },
+  { name: "Jobs Directory", path: routes.jobs.path },
+];
 
 const Dashboard = () => {
   return (
@@ -21,7 +19,7 @@ const Dashboard = () => {
       <CenterItems>
         <Container component="main" maxWidth="xs">
           <Typography sx={{ mb: 2 }} align="center" component="h1" variant="h5">
-            {labels.pageName}
+            {labels.dashboard.pageName}
           </Typography>
           <Box
             sx={{
@@ -31,7 +29,7 @@ const Dashboard = () => {
               gap: "15px",
             }}
           >
-            {labels.sections.map(({ name, path }, i) => (
+            {sections.map(({ name, path }, i) => (
               <BoxNavigation key={i} nav={path} name={name} />
             ))}
           </Box>

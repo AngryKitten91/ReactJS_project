@@ -1,14 +1,20 @@
 import { useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
+import { useState } from "react";
 import { Paper, Container, Box, TextField, Button } from "@mui/material";
 import { CenterItems } from "../../components/CenterItems";
 import { TopBar } from "../../components/TopBar";
 import { RegisterFooter } from "../../components/RegisterFooter";
-import { PageName } from "../../components/PageName";
 import routes from "../../routes/routes";
 import { labels, inputLabels, errorMessage } from "../../labels/labels";
+import { PageName } from "../../components/PageName";
+import { Info } from "../../components/Info";
+import { useUserCRUD } from "../../hooks/useUserCRUD";
 
 const RegisterScreen = () => {
+  const [status, setStatus] = useState("");
+  const { setUser, user } = useUserCRUD();
+
   const form = useForm({
     defaultValues: {
       email: "",
@@ -25,9 +31,16 @@ const RegisterScreen = () => {
 
   const navigate = useNavigate();
 
-  const onSubmit = (data) => {
-    console.log(data);
-    navigate(routes.dashboard.path);
+  const onSubmit = ({ email, password }) => {
+    if (user?.email === email) {
+      setStatus(errorMessage.userExists);
+    } else {
+      setUser(email, password);
+      setStatus(errorMessage.userCreated);
+      setTimeout(() => {
+        navigate(routes.login.path);
+      }, 1000);
+    }
   };
 
   return (
@@ -44,7 +57,7 @@ const RegisterScreen = () => {
               }}
             >
               <PageName name={labels.register.pageName} />
-
+              <Info info={status} />
               <Box
                 component="form"
                 onSubmit={handleSubmit(onSubmit)}

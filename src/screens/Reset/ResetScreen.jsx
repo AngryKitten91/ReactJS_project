@@ -1,17 +1,23 @@
 import { useNavigate } from "react-router-dom";
+import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { Paper, Container, Box, TextField, Button } from "@mui/material";
 import { CenterItems } from "../../components/CenterItems";
 import { TopBar } from "../../components/TopBar";
 import { PageName } from "../../components/PageName";
 import routes from "../../routes/routes";
+import { RegisterFooter } from "../../components/RegisterFooter";
 import { labels, inputLabels, errorMessage } from "../../labels/labels";
+import { useUserCRUD } from "../../hooks/useUserCRUD";
+import { Info } from "../../components/Info";
 
 const ResetScreen = () => {
+  const { user, reset } = useUserCRUD();
+  const [status, setStatus] = useState("");
+
   const form = useForm({
     defaultValues: {
       email: "",
-      password: "",
     },
   });
   const {
@@ -22,9 +28,18 @@ const ResetScreen = () => {
 
   const navigate = useNavigate();
 
-  const onSubmit = (data) => {
-    console.log(data);
-    navigate(routes.login.path);
+  const onSubmit = ({ email }) => {
+    if (!user) {
+      setStatus(errorMessage.userDontExist);
+    } else if (email !== user.email) {
+      setStatus(errorMessage.userDontExist);
+    } else {
+      reset();
+      setStatus(errorMessage.userReset);
+      setTimeout(() => {
+        navigate(routes.login.path);
+      }, 2000);
+    }
   };
 
   return (
@@ -41,7 +56,7 @@ const ResetScreen = () => {
               }}
             >
               <PageName name={labels.reset.pageName} />
-
+              <Info info={status} />
               <Box
                 component="form"
                 onSubmit={handleSubmit(onSubmit)}
@@ -74,6 +89,7 @@ const ResetScreen = () => {
                 >
                   {labels.reset.pageName}
                 </Button>
+                <RegisterFooter />
               </Box>
             </Box>
           </Paper>

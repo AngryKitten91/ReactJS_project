@@ -1,4 +1,5 @@
-import { useNavigate } from "react-router-dom";
+import { useState, useEffect } from "react";
+import { useNavigate, Navigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { Paper, Container, Box, TextField, Button } from "@mui/material";
 import { CenterItems } from "../../components/CenterItems";
@@ -7,8 +8,13 @@ import { LoginFooter } from "../../components/LoginFooter";
 import { PageName } from "../../components/PageName";
 import routes from "../../routes/routes";
 import { labels, inputLabels, errorMessage } from "../../labels/labels";
+import { Info } from "../../components/Info";
+import { useUserCRUD } from "../../hooks/useUserCRUD";
 
 const LoginScreen = () => {
+  const { user, login } = useUserCRUD();
+  const [status, setStatus] = useState("");
+
   const form = useForm({
     defaultValues: {
       email: "",
@@ -23,10 +29,24 @@ const LoginScreen = () => {
 
   const navigate = useNavigate();
 
-  const onSubmit = (data) => {
-    console.log(data);
-    navigate(routes.dashboard.path);
+  useEffect(() => {
+    console.log(user);
+  }, []);
+
+  const onSubmit = ({ email, password }) => {
+    if (user === null) {
+      setStatus(errorMessage.userDontExist);
+    } else if (user?.password !== password || user?.email !== email) {
+      setStatus(errorMessage.wrongData);
+    } else if (user?.password === password && user?.email === email) {
+      login();
+      navigate(routes.dashboard.path);
+    }
   };
+
+  if (user?.isAuthenticated) {
+    return <Navigate to={routes.dashboard.path} replace />;
+  }
 
   return (
     <>
@@ -42,6 +62,7 @@ const LoginScreen = () => {
               }}
             >
               <PageName name={labels.login.pageName} />
+              <Info info={status} />
               <Box
                 component="form"
                 onSubmit={handleSubmit(onSubmit)}

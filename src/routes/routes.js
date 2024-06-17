@@ -11,11 +11,11 @@ const routes = {
   dashboard: {
     path: "/dashboard",
   },
-  jobs: {
-    path: "/login",
-  },
   users: {
     path: "/management",
+  },
+  jobs: {
+    path: "/jobs",
   },
 };
 
