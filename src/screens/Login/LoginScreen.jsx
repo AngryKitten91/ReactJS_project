@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { useNavigate, Navigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { Paper, Container, Box, TextField, Button } from "@mui/material";
@@ -28,10 +28,6 @@ const LoginScreen = () => {
   } = form;
 
   const navigate = useNavigate();
-
-  useEffect(() => {
-    console.log(user);
-  }, []);
 
   const onSubmit = ({ email, password }) => {
     if (user === null) {
