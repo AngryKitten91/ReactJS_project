@@ -3,16 +3,16 @@ import TextField from "@mui/material/TextField";
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
-import { Paper, Link } from "@mui/material";
+import { Paper } from "@mui/material";
 import { CenterItems } from "../../components/CenterItems";
 import { useNavigate } from "react-router-dom";
 import routes from "../../routes/routes";
 import { TopBar } from "../../components/TopBar";
+import { useForm } from "react-hook-form";
+import { LoginFooter } from "../../components/LoginFooter";
 
 const labels = {
   pageName: "Log in",
-  createAcount: "Create account",
-  forgotAccount: "Forgot Password?",
   logIn: "Log in",
   inputLabels: {
     email: "Email Address",
@@ -20,17 +20,30 @@ const labels = {
   },
 };
 
+const errorMessage = {
+  email: "Email adress i required",
+  password: "Password i required (min. 8 characters)",
+};
+
 const LoginScreen = () => {
-  const handleSubmit = (event) => {
-    event.preventDefault();
-    const data = new FormData(event.currentTarget);
-    console.log({
-      email: data.get("email"),
-      password: data.get("password"),
-    });
-  };
+  const form = useForm({
+    defaultValues: {
+      email: "",
+      password: "",
+    },
+  });
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = form;
 
   const navigate = useNavigate();
+
+  const onSubmit = (data) => {
+    console.log(data);
+    navigate(routes.dashboard.path);
+  };
 
   return (
     <>
@@ -50,9 +63,11 @@ const LoginScreen = () => {
               </Typography>
               <Box
                 component="form"
-                onSubmit={handleSubmit}
+                onSubmit={handleSubmit(onSubmit)}
                 noValidate
-                sx={{ mt: 1 }}
+                sx={{
+                  mt: 1,
+                }}
               >
                 <TextField
                   margin="normal"
@@ -64,6 +79,13 @@ const LoginScreen = () => {
                   autoComplete="email"
                   variant="filled"
                   autoFocus
+                  type="text"
+                  error={!!errors.email}
+                  helperText={errors.email?.message}
+                  {...register("email", {
+                    required: { value: true, message: errorMessage.email },
+                    pattern: /^\S+@\S+$/i,
+                  })}
                 />
                 <TextField
                   margin="normal"
@@ -75,6 +97,12 @@ const LoginScreen = () => {
                   id="password"
                   variant="filled"
                   autoComplete="current-password"
+                  error={!!errors.password}
+                  helperText={errors.password?.message}
+                  {...register("password", {
+                    required: { value: true, message: errorMessage.password },
+                    minLength: 8,
+                  })}
                 />
 
                 <Button
@@ -86,26 +114,7 @@ const LoginScreen = () => {
                   {labels.logIn}
                 </Button>
               </Box>
-              <Box sx={{ display: "flex", justifyContent: "space-between" }}>
-                <Link
-                  component="button"
-                  variant="body2"
-                  onClick={() => {
-                    navigate(routes.register.path);
-                  }}
-                >
-                  {labels.createAcount}
-                </Link>
-                <Link
-                  component="button"
-                  variant="body2"
-                  onClick={() => {
-                    navigate(routes.reset.path);
-                  }}
-                >
-                  {labels.forgotAccount}
-                </Link>
-              </Box>
+              <LoginFooter />
             </Box>
           </Paper>
         </Container>
