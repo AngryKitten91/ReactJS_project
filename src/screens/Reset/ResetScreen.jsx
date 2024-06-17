@@ -1,25 +1,11 @@
-import Button from "@mui/material/Button";
-import TextField from "@mui/material/TextField";
-import Box from "@mui/material/Box";
-import Typography from "@mui/material/Typography";
-import Container from "@mui/material/Container";
-import { Paper } from "@mui/material";
+import { useNavigate } from "react-router-dom";
+import { useForm } from "react-hook-form";
+import { Paper, Container, Box, TextField, Button } from "@mui/material";
 import { CenterItems } from "../../components/CenterItems";
 import { TopBar } from "../../components/TopBar";
-import { useForm } from "react-hook-form";
+import { PageName } from "../../components/PageName";
 import routes from "../../routes/routes";
-import { useNavigate } from "react-router-dom";
-
-const labels = {
-  pageName: "Reset Password",
-  inputLabels: {
-    email: "Email Address",
-  },
-};
-
-const errorMessage = {
-  email: "Email adress i required",
-};
+import { labels, inputLabels, errorMessage } from "../../labels/labels";
 
 const ResetScreen = () => {
   const form = useForm({
@@ -54,9 +40,8 @@ const ResetScreen = () => {
                 alignItems: "left",
               }}
             >
-              <Typography align="left" component="h1" variant="h5">
-                {labels.pageName}
-              </Typography>
+              <PageName name={labels.reset.pageName} />
+
               <Box
                 component="form"
                 onSubmit={handleSubmit(onSubmit)}
@@ -68,7 +53,7 @@ const ResetScreen = () => {
                   required
                   fullWidth
                   id="email"
-                  label={labels.inputLabels.email}
+                  label={inputLabels.email}
                   name="email"
                   autoComplete="email"
                   variant="filled"
@@ -87,7 +72,7 @@ const ResetScreen = () => {
                   variant="contained"
                   sx={{ mt: 3, mb: 2 }}
                 >
-                  {labels.pageName}
+                  {labels.reset.pageName}
                 </Button>
               </Box>
             </Box>

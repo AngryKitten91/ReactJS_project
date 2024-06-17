@@ -1,29 +1,12 @@
-import Button from "@mui/material/Button";
-import TextField from "@mui/material/TextField";
-import Box from "@mui/material/Box";
-import Typography from "@mui/material/Typography";
-import Container from "@mui/material/Container";
-import { Paper } from "@mui/material";
-import { CenterItems } from "../../components/CenterItems";
 import { useNavigate } from "react-router-dom";
-import routes from "../../routes/routes";
-import { TopBar } from "../../components/TopBar";
 import { useForm } from "react-hook-form";
+import { Paper, Container, Box, TextField, Button } from "@mui/material";
+import { CenterItems } from "../../components/CenterItems";
+import { TopBar } from "../../components/TopBar";
 import { LoginFooter } from "../../components/LoginFooter";
-
-const labels = {
-  pageName: "Log in",
-  logIn: "Log in",
-  inputLabels: {
-    email: "Email Address",
-    password: "Password",
-  },
-};
-
-const errorMessage = {
-  email: "Email adress i required",
-  password: "Password i required (min. 8 characters)",
-};
+import { PageName } from "../../components/PageName";
+import routes from "../../routes/routes";
+import { labels, inputLabels, errorMessage } from "../../labels/labels";
 
 const LoginScreen = () => {
   const form = useForm({
@@ -58,9 +41,7 @@ const LoginScreen = () => {
                 alignItems: "left",
               }}
             >
-              <Typography align="left" component="h1" variant="h5">
-                {labels.pageName}
-              </Typography>
+              <PageName name={labels.login.pageName} />
               <Box
                 component="form"
                 onSubmit={handleSubmit(onSubmit)}
@@ -74,7 +55,7 @@ const LoginScreen = () => {
                   required
                   fullWidth
                   id="email"
-                  label={labels.inputLabels.email}
+                  label={inputLabels.email}
                   name="email"
                   autoComplete="email"
                   variant="filled"
@@ -92,7 +73,7 @@ const LoginScreen = () => {
                   required
                   fullWidth
                   name="password"
-                  label={labels.inputLabels.password}
+                  label={inputLabels.password}
                   type="password"
                   id="password"
                   variant="filled"
@@ -111,7 +92,7 @@ const LoginScreen = () => {
                   variant="contained"
                   sx={{ mt: 3, mb: 2 }}
                 >
-                  {labels.logIn}
+                  {labels.login.pageName}
                 </Button>
               </Box>
               <LoginFooter />

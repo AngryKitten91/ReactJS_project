@@ -1,29 +1,12 @@
-import Button from "@mui/material/Button";
-import TextField from "@mui/material/TextField";
-import Box from "@mui/material/Box";
-import Typography from "@mui/material/Typography";
-import Container from "@mui/material/Container";
-import { Paper } from "@mui/material";
-import { CenterItems } from "../../components/CenterItems";
 import { useNavigate } from "react-router-dom";
-import { TopBar } from "../../components/TopBar";
-import routes from "../../routes/routes";
 import { useForm } from "react-hook-form";
+import { Paper, Container, Box, TextField, Button } from "@mui/material";
+import { CenterItems } from "../../components/CenterItems";
+import { TopBar } from "../../components/TopBar";
 import { RegisterFooter } from "../../components/RegisterFooter";
-
-const labels = {
-  pageName: "Sign up",
-  inputLabels: {
-    email: "Email Address",
-    password: "Password",
-    confirmPassword: "Confirm Password",
-  },
-};
-
-const errorMessage = {
-  email: "Email adress i required",
-  password: "Password i required (min. 8 characters)",
-};
+import { PageName } from "../../components/PageName";
+import routes from "../../routes/routes";
+import { labels, inputLabels, errorMessage } from "../../labels/labels";
 
 const RegisterScreen = () => {
   const form = useForm({
@@ -35,6 +18,7 @@ const RegisterScreen = () => {
   });
   const {
     register,
+    watch,
     handleSubmit,
     formState: { errors },
   } = form;
@@ -59,9 +43,8 @@ const RegisterScreen = () => {
                 alignItems: "left",
               }}
             >
-              <Typography align="left" component="h1" variant="h5">
-                {labels.pageName}
-              </Typography>
+              <PageName name={labels.register.pageName} />
+
               <Box
                 component="form"
                 onSubmit={handleSubmit(onSubmit)}
@@ -73,7 +56,7 @@ const RegisterScreen = () => {
                   required
                   fullWidth
                   id="email"
-                  label={labels.inputLabels.email}
+                  label={inputLabels.email}
                   name="email"
                   autoComplete="email"
                   variant="filled"
@@ -90,7 +73,7 @@ const RegisterScreen = () => {
                   required
                   fullWidth
                   name="password"
-                  label={labels.inputLabels.password}
+                  label={inputLabels.password}
                   type="password"
                   id="password"
                   variant="filled"
@@ -107,15 +90,22 @@ const RegisterScreen = () => {
                   required
                   fullWidth
                   name="confirmPassword"
-                  label={labels.inputLabels.confirmPassword}
+                  label={inputLabels.confirmPassword}
                   type="password"
                   id="confirmPassword"
                   variant="filled"
                   autoComplete="current-password"
                   error={!!errors.confirmPassword}
-                  helperText={errors.password?.message}
+                  helperText={
+                    errors.password?.message ?? errors.confirmPassword?.message
+                  }
                   {...register("confirmPassword", {
                     required: { value: true, message: errorMessage.password },
+                    validate: (val) => {
+                      if (watch("password") !== val) {
+                        return errorMessage.confirmPassword;
+                      }
+                    },
                     minLength: 8,
                   })}
                 />
@@ -126,7 +116,7 @@ const RegisterScreen = () => {
                   variant="contained"
                   sx={{ mt: 3, mb: 2 }}
                 >
-                  {labels.pageName}
+                  {labels.register.pageName}
                 </Button>
               </Box>
               <RegisterFooter />
