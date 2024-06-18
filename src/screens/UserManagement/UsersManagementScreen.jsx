@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { TopBar } from "../../components/TopBar";
 import { BackButton } from "../../components/BackButton";
-
+import { USERS_API_URL } from "../../public_key/API";
 import {
   Container,
   Paper,
@@ -16,8 +16,6 @@ import {
 import { EnhancedTableHead } from "../../components/EnchancedTableHead";
 import { getComparator } from "../../helpers/helpers";
 import { useHandleRequestSort } from "../../hooks/useHandleRequestSort";
-
-const USERS_API_URL = "https://jsonplaceholder.typicode.com/users";
 
 export const UsersManagementScreen = () => {
   const [users, setUsers] = useState(null);
