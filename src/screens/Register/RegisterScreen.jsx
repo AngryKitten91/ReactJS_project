@@ -1,33 +1,20 @@
 import { useNavigate } from "react-router-dom";
-import { useForm } from "react-hook-form";
 import { useState } from "react";
+import routes from "../../routes/routes";
+import { labels, inputLabels, errorMessage } from "../../labels/labels";
 import { Paper, Container, Box, TextField, Button } from "@mui/material";
 import { CenterItems } from "../../components/CenterItems";
 import { TopBar } from "../../components/TopBar";
 import { RegisterFooter } from "../../components/RegisterFooter";
-import routes from "../../routes/routes";
-import { labels, inputLabels, errorMessage } from "../../labels/labels";
 import { PageName } from "../../components/PageName";
 import { Info } from "../../components/Info";
 import { useUserCRUD } from "../../hooks/useUserCRUD";
+import { useFormHook } from "../../hooks/useFormHook";
 
 const RegisterScreen = () => {
   const [status, setStatus] = useState("");
   const { setUser, user } = useUserCRUD();
-
-  const form = useForm({
-    defaultValues: {
-      email: "",
-      password: "",
-      confirmPassword: "",
-    },
-  });
-  const {
-    register,
-    watch,
-    handleSubmit,
-    formState: { errors },
-  } = form;
+  const { register, handleSubmit, errors, watch } = useFormHook();
 
   const navigate = useNavigate();
 
@@ -75,7 +62,11 @@ const RegisterScreen = () => {
                   variant="filled"
                   autoFocus
                   error={!!errors.email}
-                  helperText={errors.email?.message}
+                  helperText={
+                    errors.email?.message === ""
+                      ? errorMessage.wrongMail
+                      : errors.email?.message
+                  }
                   {...register("email", {
                     required: { value: true, message: errorMessage.email },
                     pattern: /^\S+@\S+$/i,
@@ -92,7 +83,11 @@ const RegisterScreen = () => {
                   variant="filled"
                   autoComplete="current-password"
                   error={!!errors.password}
-                  helperText={errors.password?.message}
+                  helperText={
+                    errors.password?.message === ""
+                      ? "Password is required (min. 8 characters)"
+                      : errors.password?.message
+                  }
                   {...register("password", {
                     required: { value: true, message: errorMessage.password },
                     minLength: 8,
@@ -110,7 +105,9 @@ const RegisterScreen = () => {
                   autoComplete="current-password"
                   error={!!errors.confirmPassword}
                   helperText={
-                    errors.password?.message ?? errors.confirmPassword?.message
+                    errors.confirmPassword?.message === ""
+                      ? "Password is required (min. 8 characters)"
+                      : errors.confirmPassword?.message
                   }
                   {...register("confirmPassword", {
                     required: { value: true, message: errorMessage.password },

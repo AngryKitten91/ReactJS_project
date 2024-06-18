@@ -1,31 +1,20 @@
 import { useState } from "react";
 import { useNavigate, Navigate } from "react-router-dom";
-import { useForm } from "react-hook-form";
+import routes from "../../routes/routes";
+import { labels, inputLabels, errorMessage } from "../../labels/labels";
 import { Paper, Container, Box, TextField, Button } from "@mui/material";
 import { CenterItems } from "../../components/CenterItems";
 import { TopBar } from "../../components/TopBar";
 import { LoginFooter } from "../../components/LoginFooter";
 import { PageName } from "../../components/PageName";
-import routes from "../../routes/routes";
-import { labels, inputLabels, errorMessage } from "../../labels/labels";
 import { Info } from "../../components/Info";
 import { useUserCRUD } from "../../hooks/useUserCRUD";
+import { useFormHook } from "../../hooks/useFormHook";
 
 const LoginScreen = () => {
   const { user, login } = useUserCRUD();
   const [status, setStatus] = useState("");
-
-  const form = useForm({
-    defaultValues: {
-      email: "",
-      password: "",
-    },
-  });
-  const {
-    register,
-    handleSubmit,
-    formState: { errors },
-  } = form;
+  const { register, handleSubmit, errors } = useFormHook();
 
   const navigate = useNavigate();
 
@@ -79,12 +68,17 @@ const LoginScreen = () => {
                   autoFocus
                   type="text"
                   error={!!errors.email}
-                  helperText={errors.email?.message}
+                  helperText={
+                    errors.email?.message === ""
+                      ? errorMessage.wrongMail
+                      : errors.email?.message
+                  }
                   {...register("email", {
                     required: { value: true, message: errorMessage.email },
                     pattern: /^\S+@\S+$/i,
                   })}
                 />
+
                 <TextField
                   margin="normal"
                   required
@@ -96,7 +90,11 @@ const LoginScreen = () => {
                   variant="filled"
                   autoComplete="current-password"
                   error={!!errors.password}
-                  helperText={errors.password?.message}
+                  helperText={
+                    errors.password?.message === ""
+                      ? "Password is required (min. 8 characters)"
+                      : errors.password?.message
+                  }
                   {...register("password", {
                     required: { value: true, message: errorMessage.password },
                     minLength: 8,

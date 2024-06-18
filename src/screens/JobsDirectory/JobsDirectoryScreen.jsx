@@ -5,6 +5,8 @@ import { CenterItems } from "../../components/CenterItems";
 import { BackButton } from "../../components/BackButton";
 import { TopBar } from "../../components/TopBar";
 
+const site_status = "UNDER CONSTRUCTION";
+
 export const JobsDirectoryScreen = () => {
   return (
     <>
@@ -13,7 +15,7 @@ export const JobsDirectoryScreen = () => {
         <BackButton />
         <CenterItems>
           <Typography sx={{ mb: 2 }} align="center" component="h1" variant="h5">
-            UNDER CONSTRUCTION
+            {site_status}
           </Typography>
           <Box
             sx={{

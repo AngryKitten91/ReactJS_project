@@ -1,30 +1,20 @@
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
-import { useForm } from "react-hook-form";
+import routes from "../../routes/routes";
+import { labels, inputLabels, errorMessage } from "../../labels/labels";
 import { Paper, Container, Box, TextField, Button } from "@mui/material";
 import { CenterItems } from "../../components/CenterItems";
 import { TopBar } from "../../components/TopBar";
 import { PageName } from "../../components/PageName";
-import routes from "../../routes/routes";
 import { RegisterFooter } from "../../components/RegisterFooter";
-import { labels, inputLabels, errorMessage } from "../../labels/labels";
 import { useUserCRUD } from "../../hooks/useUserCRUD";
 import { Info } from "../../components/Info";
+import { useFormHook } from "../../hooks/useFormHook";
 
 const ResetScreen = () => {
   const { user, reset } = useUserCRUD();
   const [status, setStatus] = useState("");
-
-  const form = useForm({
-    defaultValues: {
-      email: "",
-    },
-  });
-  const {
-    register,
-    handleSubmit,
-    formState: { errors },
-  } = form;
+  const { register, handleSubmit, errors } = useFormHook();
 
   const navigate = useNavigate();
 
@@ -37,7 +27,7 @@ const ResetScreen = () => {
       reset();
       setStatus(errorMessage.userReset);
       setTimeout(() => {
-        navigate(routes.login.path);
+        navigate(routes.register.path);
       }, 2000);
     }
   };
@@ -74,7 +64,11 @@ const ResetScreen = () => {
                   variant="filled"
                   autoFocus
                   error={!!errors.email}
-                  helperText={errors.email?.message}
+                  helperText={
+                    errors.email?.message === ""
+                      ? errorMessage.wrongMail
+                      : errors.email?.message
+                  }
                   {...register("email", {
                     required: { value: true, message: errorMessage.email },
                     pattern: /^\S+@\S+$/i,

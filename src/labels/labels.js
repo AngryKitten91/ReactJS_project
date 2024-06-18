@@ -22,6 +22,7 @@ export const inputLabels = {
 
 export const errorMessage = {
   email: "Email adress i required",
+  wrongMail:"Wrong email address",
   password: "Password is required (min. 8 characters)",
   confirmPassword: "Your passwords do no match",
   userCreated: "User Created",
