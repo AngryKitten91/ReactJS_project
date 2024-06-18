@@ -11,7 +11,7 @@ Currently, two official plugins are available:
 
 This project is a basic React application that includes essential features such as user login, a dashboard, multiple views, and global state management.
 
-[(Working Demo)](https://angrykitten91.github.io/ReactJS_project//)
+[(Working Demo)](https://angrykitten91.github.io/ReactJS_project/)
 
 ## Main Packages Used
 
