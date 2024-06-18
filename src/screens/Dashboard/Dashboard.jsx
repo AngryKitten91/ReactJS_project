@@ -12,7 +12,7 @@ const sections = [
   { name: "Jobs Directory", path: routes.jobs.path },
 ];
 
-const Dashboard = () => {
+export const Dashboard = () => {
   return (
     <>
       <TopBar />
@@ -38,5 +38,3 @@ const Dashboard = () => {
     </>
   );
 };
-
-export default Dashboard;

@@ -11,7 +11,7 @@ import { useUserCRUD } from "../../hooks/useUserCRUD";
 import { Info } from "../../components/Info";
 import { useFormHook } from "../../hooks/useFormHook";
 
-const ResetScreen = () => {
+export const ResetScreen = () => {
   const { user, reset } = useUserCRUD();
   const [status, setStatus] = useState("");
   const { register, handleSubmit, errors } = useFormHook();
@@ -92,5 +92,3 @@ const ResetScreen = () => {
     </>
   );
 };
-
-export default ResetScreen;

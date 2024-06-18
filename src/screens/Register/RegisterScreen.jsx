@@ -11,7 +11,7 @@ import { Info } from "../../components/Info";
 import { useUserCRUD } from "../../hooks/useUserCRUD";
 import { useFormHook } from "../../hooks/useFormHook";
 
-const RegisterScreen = () => {
+export const RegisterScreen = () => {
   const [status, setStatus] = useState("");
   const { setUser, user } = useUserCRUD();
   const { register, handleSubmit, errors, watch } = useFormHook();
@@ -137,5 +137,3 @@ const RegisterScreen = () => {
     </>
   );
 };
-
-export default RegisterScreen;

@@ -1,11 +1,11 @@
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import { ThemeProvider } from "./providers/ThemeProvider";
 import routes from "./routes/routes.js";
-import LoginScreen from "./screens/Login/LoginScreen";
-import RegisterScreen from "./screens/Register/RegisterScreen";
-import ResetScreen from "./screens/Reset/ResetScreen";
-import Dashboard from "./screens/Dashboard/Dashboard";
-import UsersManagementScreen from "./screens/UserManagement/UsersManagementScreen";
+import { LoginScreen } from "./screens/Login/LoginScreen";
+import { RegisterScreen } from "./screens/Register/RegisterScreen";
+import { ResetScreen } from "./screens/Reset/ResetScreen";
+import { Dashboard } from "./screens/Dashboard/Dashboard";
+import { UsersManagementScreen } from "./screens/UserManagement/UsersManagementScreen";
 import { JobsDirectoryScreen } from "./screens/JobsDirectory/JobsDirectoryScreen.jsx";
 import { ProtectedRoute } from "./providers/ProtectedRoute.jsx";
 import { Navigate } from "react-router-dom";

@@ -11,7 +11,7 @@ import { Info } from "../../components/Info";
 import { useUserCRUD } from "../../hooks/useUserCRUD";
 import { useFormHook } from "../../hooks/useFormHook";
 
-const LoginScreen = () => {
+export const LoginScreen = () => {
   const { user, login } = useUserCRUD();
   const [status, setStatus] = useState("");
   const { register, handleSubmit, errors } = useFormHook();
@@ -118,5 +118,3 @@ const LoginScreen = () => {
     </>
   );
 };
-
-export default LoginScreen;

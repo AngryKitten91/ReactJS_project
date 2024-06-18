@@ -19,7 +19,7 @@ import { useHandleRequestSort } from "../../hooks/useHandleRequestSort";
 
 const USERS_API_URL = "https://jsonplaceholder.typicode.com/users";
 
-const UsersManagementScreen = () => {
+export const UsersManagementScreen = () => {
   const [users, setUsers] = useState(null);
   const [isError, setError] = useState(false);
   const [isLoading, setLoading] = useState(false);
@@ -59,7 +59,7 @@ const UsersManagementScreen = () => {
         <TopBar name="Users Management" />
         <Container>
           <BackButton />
-          <Typography>Ooops something went wrong...</Typography>
+          <Typography align="center">Ooops something went wrong...</Typography>
         </Container>
       </>
     );
@@ -71,7 +71,7 @@ const UsersManagementScreen = () => {
         <TopBar name="Users Management" />
         <Container>
           <BackButton />
-          <Typography>Loading...</Typography>
+          <Typography align="center">Loading...</Typography>
         </Container>
       </>
     );
@@ -82,7 +82,7 @@ const UsersManagementScreen = () => {
       <Container>
         <BackButton />
         <TableContainer sx={{ mt: 3 }} component={Paper}>
-          <Table sx={{ minWidth: 650 }} aria-label="simple table">
+          <Table sx={{ minWidth: 650 }} aria-label="user table">
             <EnhancedTableHead
               order={order}
               orderBy={orderBy}
@@ -120,5 +120,3 @@ const UsersManagementScreen = () => {
     </>
   );
 };
-
-export default UsersManagementScreen;
