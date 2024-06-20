@@ -11,7 +11,8 @@ Currently, two official plugins are available:
 
 This project is a basic React application that includes essential features such as user login, a dashboard, multiple views, and global state management.
 
-[(Working Demo)](https://angrykitten91.github.io/ReactJS_project/)
+[Working Demo](https://angrykitten91.github.io/ReactJS_project/)
+(Note: React router not working well with gh pages trying manually changing path)
 
 ## Main Packages Used
 
